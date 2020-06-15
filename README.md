@@ -42,6 +42,7 @@ Find the file `index.js` and complete the tasks.
 Edit the `ReadMe` file with your answers.
 
 1. In your own words, define closure (1-2 sentences).
+
    A closure is when variables are passed along to nested functions. More specifically, when you have a function that has it's own scoped variables, and this function returns a function definition, the function definition will also include closures, which hold all the variables that existed in the scope in which it was called.
 
 2. Study the following code, then answer the questions below.
@@ -65,7 +66,7 @@ dansRoll();
 
 a. Where is closure used in this code? How can you tell?
 
-The closure is used inside of the returned function. You can tell because when you call that returned function, it has access to the variable "name", which doesn't exist inside its own scope. Instead, it exists inside of the closure.
+    The closure is used inside of the returned function. You can tell because when you call that returned function, it has access to the variable "name", which doesn't exist inside its own scope. Instead, it exists inside of the closure.
 
 b. Compare and contrast calling `dansRoll` the first and second time. What is always the same? What could change?
 
@@ -74,7 +75,7 @@ b. Compare and contrast calling `dansRoll` the first and second time. What is al
 
 c. What is the lexical scope of `newRoll`?
 
-The lexical scope of newRoll is the returned function. In this case, because the returned function was saved to dansRoll, this is the lexical scope of newRoll.
+    The lexical scope of newRoll is the returned function. In this case, because the returned function was saved to dansRoll, this is the lexical scope of newRoll.
 
 ### Task 2c - Exit Ticket
 
@@ -94,13 +95,21 @@ See if you can complete one or more of the following challenges:
 (function () {
   var a = (b = 3);
 })();
-console.log('a defined? ' + (typeof a !== 'undefined'));
-console.log('b defined? ' + (typeof b !== 'undefined'));
+console.log('a defined? No ' + (typeof a !== 'undefined'));
+console.log('b defined? Yes ' + (typeof b !== 'undefined'));
 ```
+
+Because variable a is scoped inside of a function, and console.log is being invoked in the global context, the log method will not have access to a.
+Because variable b was never declared either inside of the function in which it was assigned, nor in the outer scope, it will be assigned automatically to the global context and thus, console.log will have access to it.
 
 2. Write a function that would allow you to do this using a closure. (This is another interview question we've seen before - when you're ready for answers, view an explanation [here](https://www.coderbyte.com/algorithm/3-common-javascript-closure-questions)).
 
 ```js
+function createBase(base) {
+  return function addSix(num) {
+    return base + num;
+  };
+}
 var addSix = createBase(6);
 addSix(10); // returns 16
 addSix(21); // returns 27
